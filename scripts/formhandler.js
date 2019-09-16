@@ -38,8 +38,6 @@
     var slider = $('#strengthLevel');
     var sliderLabels = $('label[for="' + slider[0].id + '"]');
 
-    var displayValue = function(){};
-
     slider.on('input', function() {
 
       sliderLabels[1].innerText = this.value;
