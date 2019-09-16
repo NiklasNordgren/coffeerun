@@ -26,7 +26,34 @@
       console.log(data);
       fn(data);
       this.reset();
+      this.elements[0].focus();
     });
+  };
+
+
+  //Silver Challenge: Showing the Value as the SliderChanges
+  FormHandler.prototype.addSliderHandler = function() {
+    console.log('Setting slider handler for form');
+
+    var slider = $('#strengthLevel');
+    var sliderLabels = $('label[for="' + slider[0].id + '"]');
+
+    var displayValue = function(){};
+
+    slider.on('input', function() {
+
+      sliderLabels[1].innerText = this.value;
+
+      let redValue = this.value * 2.55;
+      let greenValue = 255 - (this.value * 2.55);
+
+      sliderLabels[1].style = "color: rgb(" + redValue + "," + greenValue + ",0)";
+
+    });
+
+    //Trigger to set styles according to initial value
+    $('#strengthLevel').trigger('input');
+
   };
 
   App.FormHandler = FormHandler;

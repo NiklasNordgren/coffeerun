@@ -7,8 +7,10 @@
   var FormHandler = App.FormHandler;
   var myTruck = new Truck('KITT', new DataStore());
   window.myTruck = myTruck;
-  var formHandler = new FormHandler(FORM_SELECTOR);
 
+  var formHandler = new FormHandler(FORM_SELECTOR);
   formHandler.addSubmitHandler(myTruck.createOrder.bind(myTruck));
+  formHandler.addSliderHandler();
+
   console.log(formHandler);
 })(window);
