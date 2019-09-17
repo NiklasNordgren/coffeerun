@@ -14,6 +14,7 @@
   <header>
     <h1>CoffeeRun</h1>
   </header>
+
   <section>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -26,6 +27,18 @@
             <label for="emailInput">Email</label>
             <input class="form-control" type="email" name="emailAddress" id="emailInput" value="" placeholder="dr@who.com">
           </div>
+
+          <!-- Gold Challenge: Adding Achievements -->
+          <div id="powerUpDiv" class="form-group" style="display:none">
+            <label for="PowerUp">Power-Up</label>
+            <select id="PowerUp" class="form-control" name="powerup">
+              <option value="">None</option>
+              <option value="timetravel">Time travel</option>
+              <option value="mindreading">Mind reading</option>
+              <option value="bugfreecode">Bug-free code</option>
+            </select>
+          </div>
+
           <div class="radio"><label><input type="radio" name="size" value="short">Short</label></div>
           <div class="radio"><label><input type="radio" name="size" value="tall" checked>Tall</label></div>
           <div class="radio"><label><input type="radio" name="size" value="grande">Grande</label></div>
@@ -50,7 +63,29 @@
       </div>
     </div>
   </section>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"charset="utf-8"></script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="modal-title" id="myModalLabel" style="text-align: center;">Congratulations on your amazing intensity and commitment to flavor!</h2>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          <p>Would you like to use your achievement?</p>
+          <button id="achievementYesButton" type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
   <script src="scripts/formhandler.js" charset="utf-8"></script>
   <script src="scripts/datastore.js" charset="utf-8"></script>
   <script src="scripts/truck.js" charset="utf-8"></script>
