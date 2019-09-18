@@ -4,11 +4,14 @@
   var $ = window.jQuery;
   var emailsWithPowerUpsActive;
 
+
   function FormHandler(selector) {
     if (!selector) {
       throw new Error('No selector provided');
     }
     emailsWithPowerUpsActive = [];
+    this.coffeeOrder = "";
+    this.coffeeStrength = "30";
 
     this.$formElement = $(selector);
     if (this.$formElement.length === 0) {
@@ -89,14 +92,15 @@
       }
     });
 
-    this.$formElement.on('input', '[name="coffee"]', '[name="strength"]', function(event){
-      var coffeeOrder = $('[name="coffee"]')[0].value;
-      var coffeeStrength = $('[name="strength"]')[0].value;
+    $('[name="coffee"]').add('[name="strength"]')
+    .on('input', function(event){
+      this.coffeeOrder = $('[name="coffee"]')[0].value;
+      this.coffeeStrength = $('[name="strength"]')[0].value;
       var message = '';
-      if (fn2(coffeeOrder, coffeeStrength)) {
+      if (fn2(this.coffeeOrder, this.coffeeStrength)) {
         event.target.setCustomValidity('');
       } else {
-        message = coffeeOrder + ' ' + coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
+        message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
         event.target.setCustomValidity(message);
       }
 
