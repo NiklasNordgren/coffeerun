@@ -30,17 +30,15 @@
       fn(data);
 
       //Gold Challenge: Adding Achievements
-      var email = data.emailAddress;
-
       if (data.size === "coffee-zilla" && data.flavor !== "" && data.strength === "100") {
         $('#myModal').modal('show');
         $('#achievementYesButton').on('click', function(event) {
-          emailsWithPowerUpsActive.push(email);
+          emailsWithPowerUpsActive.push(data.emailAddress);
         });
       }
 
       //Remove email from emailsWithPowerUpsActive-array if an power up was chosen
-      var index = emailsWithPowerUpsActive.indexOf(email);
+      var index = emailsWithPowerUpsActive.indexOf(data.emailAddress);
       if (index > -1 && data.powerup !== "") {
         emailsWithPowerUpsActive.splice(index, 1);
       }
