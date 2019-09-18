@@ -112,13 +112,13 @@
 
         var newValues = [this.coffeeOrder, this.coffeeStrength];
 
-        if(oldValues[0] !== newValues[0] || oldValues[1] !== newValues[1]){
+        if(oldValues[0] !== newValues[0]){
           $('[name="strength"]').trigger('input');
         }
 
       }.bind(this));
 
-      $('[name="strength"]').on('input change', function(event) {
+      $('[name="strength"]').on('input', function(event) {
 
           var oldValues = [this.coffeeOrder, this.coffeeStrength];
 
@@ -135,7 +135,7 @@
 
           var newValues = [this.coffeeOrder, this.coffeeStrength];
 
-          if(oldValues[0] !== newValues[0] || oldValues[1] !== newValues[1]){
+          if(oldValues[1] !== newValues[1]){
             $('[name="coffee"]').trigger('input');
           }
 
