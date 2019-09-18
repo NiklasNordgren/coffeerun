@@ -101,11 +101,12 @@
 
         this.coffeeOrder = event.target.form.coffee.value;
         this.coffeeStrength = parseInt(event.target.form.strength.value);
+
         var message = '';
         if (fn2(this.coffeeOrder, this.coffeeStrength)) {
           event.target.setCustomValidity('');
         } else {
-          message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
+          message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating!'
           event.target.setCustomValidity(message);
         }
 
@@ -117,17 +118,18 @@
 
       }.bind(this));
 
-      $('[name="strength"]').on('input', function(event) {
+      $('[name="strength"]').on('input change', function(event) {
 
           var oldValues = [this.coffeeOrder, this.coffeeStrength];
 
           this.coffeeOrder = event.target.form.coffee.value;
           this.coffeeStrength = parseInt(event.target.form.strength.value);
+
           var message = '';
           if (fn2(this.coffeeOrder, this.coffeeStrength)) {
             event.target.setCustomValidity('');
           } else {
-            message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
+            message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating!'
             event.target.setCustomValidity(message);
           }
 
