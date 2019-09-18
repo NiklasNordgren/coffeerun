@@ -5,11 +5,13 @@
   var emailsWithPowerUpsActive;
 
 
+
   function FormHandler(selector) {
     if (!selector) {
       throw new Error('No selector provided');
     }
     emailsWithPowerUpsActive = [];
+
     this.coffeeOrder = "";
     this.coffeeStrength = "30";
 
@@ -96,8 +98,7 @@
     var coffeeStrengthSlider = $('[name="strength"]');
 
     coffeeField.on('input', function(event){
-      this.coffeeOrder = $('[name="coffee"]')[0].value;
-      this.coffeeStrength = $('[name="strength"]')[0].value;
+      this.coffeeOrder = event.target.value;
       var message = '';
       if (fn2(this.coffeeOrder, this.coffeeStrength)) {
         event.target.setCustomValidity('');
@@ -105,14 +106,11 @@
         message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
         event.target.setCustomValidity(message);
       }
-
-      coffeeStrengthSlider.trigger('input');
 
     });
 
     coffeeStrengthSlider.on('input', function(event){
-      this.coffeeOrder = $('[name="coffee"]')[0].value;
-      this.coffeeStrength = $('[name="strength"]')[0].value;
+      this.coffeeStrength = event.target.value;
       var message = '';
       if (fn2(this.coffeeOrder, this.coffeeStrength)) {
         event.target.setCustomValidity('');
@@ -121,10 +119,7 @@
         event.target.setCustomValidity(message);
       }
 
-      coffeeField.trigger('input');
-
     });
-
 
   };
 
