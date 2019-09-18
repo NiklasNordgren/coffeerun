@@ -96,19 +96,19 @@
 
     // Silver Challenge: Custom Validation for Decaf
     $('[name="coffee"]')
-    .add($('[name="strength"]'))
-    .on('input', function(event){
-      this.coffeeOrder = event.target.form.coffee.value;
-      this.coffeeStrength = event.target.form.strength.value;;
-      var message = '';
-      if (fn2(this.coffeeOrder, this.coffeeStrength)) {
-        event.target.setCustomValidity('');
-      } else {
-        message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
-        event.target.setCustomValidity(message);
-      }
+      .add($('[name="strength"]'))
+      .on('input', function(event) {
+        this.coffeeOrder = event.target.form.coffee.value;
+        this.coffeeStrength = event.target.form.strength.value;;
+        var message = '';
+        if (fn2(this.coffeeOrder, this.coffeeStrength)) {
+          event.target.setCustomValidity('');
+        } else {
+          message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
+          event.target.setCustomValidity(message);
+        }
 
-    }.bind(this));
+      }.bind(this));
 
   };
 
