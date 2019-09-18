@@ -13,7 +13,7 @@
     emailsWithPowerUpsActive = [];
 
     this.coffeeOrder = "";
-    this.coffeeStrength = "30";
+    this.coffeeStrength = 30;
 
     this.$formElement = $(selector);
     if (this.$formElement.length === 0) {
@@ -95,11 +95,12 @@
     });
 
     // Silver Challenge: Custom Validation for Decaf
-    $('[name="coffee"]')
-      .add($('[name="strength"]'))
-      .on('input', function(event) {
+    $('[name="coffee"]').on('input', function(event) {
+
+        var oldValues = [this.coffeeOrder, this.coffeeStrength];
+
         this.coffeeOrder = event.target.form.coffee.value;
-        this.coffeeStrength = event.target.form.strength.value;;
+        this.coffeeStrength = parseInt(event.target.form.strength.value);
         var message = '';
         if (fn2(this.coffeeOrder, this.coffeeStrength)) {
           event.target.setCustomValidity('');
@@ -108,7 +109,35 @@
           event.target.setCustomValidity(message);
         }
 
+        var newValues = [this.coffeeOrder, this.coffeeStrength];
+
+        if(oldValues[0] !== newValues[0] || oldValues[1] !== newValues[1]){
+          $('[name="strength"]').trigger('input');
+        }
+
       }.bind(this));
+
+      $('[name="strength"]').on('input', function(event) {
+
+          var oldValues = [this.coffeeOrder, this.coffeeStrength];
+
+          this.coffeeOrder = event.target.form.coffee.value;
+          this.coffeeStrength = parseInt(event.target.form.strength.value);
+          var message = '';
+          if (fn2(this.coffeeOrder, this.coffeeStrength)) {
+            event.target.setCustomValidity('');
+          } else {
+            message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
+            event.target.setCustomValidity(message);
+          }
+
+          var newValues = [this.coffeeOrder, this.coffeeStrength];
+
+          if(oldValues[0] !== newValues[0] || oldValues[1] !== newValues[1]){
+            $('[name="coffee"]').trigger('input');
+          }
+
+        }.bind(this));
 
   };
 
