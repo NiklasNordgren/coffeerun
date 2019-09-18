@@ -107,7 +107,7 @@
         event.target.setCustomValidity(message);
       }
 
-    });
+    }.bind(this));
 
     coffeeStrengthSlider.on('input', function(event){
       this.coffeeStrength = event.target.value;
@@ -119,7 +119,7 @@
         event.target.setCustomValidity(message);
       }
 
-    });
+    }.bind(this));
 
   };
 
