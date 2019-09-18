@@ -99,6 +99,7 @@
 
     coffeeField.on('input', function(event){
       this.coffeeOrder = event.target.value;
+      this.coffeeStrength = event.target.form.strength.value;;
       var message = '';
       if (fn2(this.coffeeOrder, this.coffeeStrength)) {
         event.target.setCustomValidity('');
@@ -110,6 +111,7 @@
     }.bind(this));
 
     coffeeStrengthSlider.on('input', function(event){
+      this.coffeeOrder = event.target.form.coffee.value;
       this.coffeeStrength = event.target.value;
       var message = '';
       if (fn2(this.coffeeOrder, this.coffeeStrength)) {
