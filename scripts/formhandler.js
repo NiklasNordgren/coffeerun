@@ -62,7 +62,6 @@
 
     //customization of reset
     this.$formElement.on('reset', function(event) {
-      event.stopImmediatePropagation();
 
       var slider = $('#strengthLevel');
       var sliderLabels = $('label[for="' + slider[0].id + '"]');
@@ -72,6 +71,7 @@
       $('#powerUpDiv').css('display', 'none');
       this.elements[0].focus();
     });
+
 
   };
 
@@ -89,12 +89,9 @@
       }
     });
 
-    var coffeeOrder;
-    var coffeeStrength;
-
-    this.$formElement.on('input', '[name="coffee"]', function(event) {
-      coffeeOrder = event.target.value;
-      coffeeStrength = $('[name="strength"]')[0].value;
+    this.$formElement.on('input', '[name="coffee"]', '[name="strength"]', function(event){
+      var coffeeOrder = $('[name="coffee"]')[0].value;
+      var coffeeStrength = $('[name="strength"]')[0].value;
       var message = '';
       if (fn2(coffeeOrder, coffeeStrength)) {
         event.target.setCustomValidity('');
@@ -102,19 +99,7 @@
         message = coffeeOrder + ' ' + coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
         event.target.setCustomValidity(message);
       }
-    });
 
-
-    this.$formElement.on('input', '[name="strength"]', function(event) {
-      coffeeStrength = event.target.value;
-      coffeeOrder = $('[name="coffee"]')[0].value;
-      var message = '';
-      if (fn2(coffeeOrder, coffeeStrength)) {
-        event.target.setCustomValidity('');
-      } else {
-        message = coffeeOrder + ' ' + coffeeStrength + ' invalid Caffeine rating! (coffeeStrengthSlider)'
-        event.target.setCustomValidity(message);
-      }
     });
 
   };
