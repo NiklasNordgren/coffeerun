@@ -14,11 +14,59 @@
   }
 
   CheckList.prototype.addClickHandler = function(fn) {
+
+    var DELAY = 2500,
+      clicks = 0,
+      timer = null;
+
+    //Gold Challenge: Allowing Order Editing
     this.$element.on('click', 'input', function(event) {
+
+      clicks++;
       var email = event.target.value;
-      this.removeRow(email);
-      fn(email);
+
+      if (clicks === 1) {
+
+        this.$element
+          .find('[value="' + email + '"]')
+          .closest('[data-coffee-order="checkbox"]')
+          .css("background-color", "#d1d1e0");
+
+        timer = setTimeout(function() {
+
+          this.removeRow(email);
+          fn(email);
+          clicks = 0;
+
+        }.bind(this), DELAY);
+
+      } else {
+
+        clearTimeout(timer);
+        //Fill form
+        var ds = App.DataStore;
+        var orderValues = ds.prototype.get(email);
+        console.log(orderValues);
+
+        $('[name=coffee]').val(orderValues['coffee']);
+        $('[name=emailAddress]').val(orderValues['emailAddress']);
+        $('[name=powerup]').val(orderValues['PowerUp']);
+        $('[value=' + orderValues['size']  + ']').attr('checked', true);
+        $('[name=flavor]').val(orderValues['flavor']);
+        $('[name=strength]').val(orderValues['strength']);
+
+        $('#strengthLevel').trigger('input');
+
+        clicks = 0;
+      }
+
+
     }.bind(this));
+
+    this.$element.on("dblclick", function(e) {
+      e.preventDefault(); //cancel system double-click event
+    });
+
   };
 
   CheckList.prototype.addRow = function(coffeeOrder) {
