@@ -94,25 +94,12 @@
       }
     });
 
-    var coffeeField = $('[name="coffee"]');
-    var coffeeStrengthSlider = $('[name="strength"]');
-
-    coffeeField.on('input', function(event){
-      this.coffeeOrder = event.target.value;
-      this.coffeeStrength = event.target.form.strength.value;;
-      var message = '';
-      if (fn2(this.coffeeOrder, this.coffeeStrength)) {
-        event.target.setCustomValidity('');
-      } else {
-        message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating! (coffeeOrderField)'
-        event.target.setCustomValidity(message);
-      }
-
-    }.bind(this));
-
-    coffeeStrengthSlider.on('input', function(event){
+    // Silver Challenge: Custom Validation for Decaf
+    $('[name="coffee"]')
+    .add($('[name="strength"]'))
+    .on('input', function(event){
       this.coffeeOrder = event.target.form.coffee.value;
-      this.coffeeStrength = event.target.value;
+      this.coffeeStrength = event.target.form.strength.value;;
       var message = '';
       if (fn2(this.coffeeOrder, this.coffeeStrength)) {
         event.target.setCustomValidity('');
