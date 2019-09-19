@@ -76,7 +76,6 @@
       this.elements[0].focus();
     });
 
-
   };
 
   FormHandler.prototype.addInputHandler = function(fn, fn2, remoteDS) {

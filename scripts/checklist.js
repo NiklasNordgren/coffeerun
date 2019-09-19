@@ -33,9 +33,10 @@
           .css("background-color", "#d1d1e0");
 
         timer = setTimeout(function() {
-
-          this.removeRow(email);
-          fn(email);
+          fn(email)
+            .then(function() {
+              this.removeRow(email);
+            }.bind(this));
           clicks = 0;
 
         }.bind(this), DELAY);
@@ -43,7 +44,7 @@
       } else {
 
         clearTimeout(timer);
-        //Fill form
+        //Fill form by using local datastore
         var ds = App.DataStore;
         var orderValues = ds.prototype.get(email);
         console.log(orderValues);
@@ -51,7 +52,7 @@
         $('[name=coffee]').val(orderValues['coffee']);
         $('[name=emailAddress]').val(orderValues['emailAddress']);
         $('[name=powerup]').val(orderValues['PowerUp']);
-        $('[value=' + orderValues['size']  + ']').attr('checked', true);
+        $('[value=' + orderValues['size'] + ']').attr('checked', true);
         $('[name=flavor]').val(orderValues['flavor']);
         $('[name=strength]').val(orderValues['strength']);
 
@@ -64,7 +65,7 @@
     }.bind(this));
 
     this.$element.on("dblclick", function(e) {
-      e.preventDefault(); //cancel system double-click event
+      e.preventDefault();
     });
 
   };

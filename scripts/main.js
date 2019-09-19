@@ -25,6 +25,7 @@
         });
   });
   formHandler.addInputHandler(Validation.isCompanyEmail, Validation.isDecaf, remoteDS);
+  myTruck.printOrders(checkList.addRow.bind(checkList));
 
   console.log(formHandler);
 })(window);
