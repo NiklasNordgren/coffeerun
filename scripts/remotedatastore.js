@@ -27,7 +27,8 @@
   RemoteDataStore.prototype.get = function(key, cb) {
     $.get(this.serverUrl + '/' + key, function(serverResponse) {
       console.log(serverResponse);
-      cb(serverResponse);
+      if (cb)
+        cb(serverResponse);
     });
   };
 
@@ -36,6 +37,13 @@
       type: 'DELETE'
     });
   };
+
+  RemoteDataStore.prototype.setAsync = function(tof) {
+    $.ajax({
+      async: tof
+    });
+  };
+
 
   App.RemoteDataStore = RemoteDataStore;
   window.App = App;

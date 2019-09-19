@@ -4,8 +4,6 @@
   var $ = window.jQuery;
   var emailsWithPowerUpsActive;
 
-
-
   function FormHandler(selector) {
     if (!selector) {
       throw new Error('No selector provided');
@@ -80,16 +78,19 @@
 
   };
 
-  FormHandler.prototype.addInputHandler = function(fn, fn2) {
+  FormHandler.prototype.addInputHandler = function(fn, fn2, remoteDS) {
     console.log('Setting input handler for form');
 
     this.$formElement.on('blur', '[name="emailAddress"]', function(event) {
       var emailAddress = event.target.value;
 
       //Silver Challenge: Validating Against the RemoteServer
-      var rds = App.RemoteDataStore;
-      var remoteEmailAddresses = rds.prototype.getAll(function(){
-        
+      remoteDS.get(emailAddress, function(serverResponse) {
+        if (serverResponse.emailAddress === emailAddress) {
+          message = emailAddress + ' already exsists in the remote database!';
+          event.target.setCustomValidity(message);
+          event.target.reportValidity();
+        }
       });
 
       var message = '';
@@ -99,50 +100,50 @@
         message = emailAddress + ' is not an authorized email address!'
         event.target.setCustomValidity(message);
       }
-    }.bind(this));
+    });
 
     // Silver Challenge: Custom Validation for Decaf
     $('[name="coffee"]').on('input', function(event) {
 
-        var oldValues = [this.coffeeOrder, this.coffeeStrength];
-        this.coffeeOrder = event.target.value;
+      var oldValues = [this.coffeeOrder, this.coffeeStrength];
+      this.coffeeOrder = event.target.value;
 
-        var message = '';
-        if (fn2(this.coffeeOrder, this.coffeeStrength)) {
-          event.target.setCustomValidity('');
-        } else {
-          message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
-          event.target.setCustomValidity(message);
-        }
+      var message = '';
+      if (fn2(this.coffeeOrder, this.coffeeStrength)) {
+        event.target.setCustomValidity('');
+      } else {
+        message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
+        event.target.setCustomValidity(message);
+      }
 
-        var newValues = [this.coffeeOrder, this.coffeeStrength];
+      var newValues = [this.coffeeOrder, this.coffeeStrength];
 
-        if(oldValues[0] !== newValues[0]){
-          $('[name="strength"]').trigger('input');
-        }
+      if (oldValues[0] !== newValues[0]) {
+        $('[name="strength"]').trigger('input');
+      }
 
-      }.bind(this));
+    }.bind(this));
 
-      $('[name="strength"]').on('input', function(event) {
+    $('[name="strength"]').on('input', function(event) {
 
-          var oldValues = [this.coffeeOrder, this.coffeeStrength];
-          this.coffeeStrength = parseInt(event.target.value);
+      var oldValues = [this.coffeeOrder, this.coffeeStrength];
+      this.coffeeStrength = parseInt(event.target.value);
 
-          var message = '';
-          if (fn2(this.coffeeOrder, this.coffeeStrength)) {
-            event.target.setCustomValidity('');
-          } else {
-            message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
-            event.target.setCustomValidity(message);
-          }
+      var message = '';
+      if (fn2(this.coffeeOrder, this.coffeeStrength)) {
+        event.target.setCustomValidity('');
+      } else {
+        message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
+        event.target.setCustomValidity(message);
+      }
 
-          var newValues = [this.coffeeOrder, this.coffeeStrength];
+      var newValues = [this.coffeeOrder, this.coffeeStrength];
 
-          if(oldValues[1] !== newValues[1]){
-            $('[name="coffee"]').trigger('input');
-          }
+      if (oldValues[1] !== newValues[1]) {
+        $('[name="coffee"]').trigger('input');
+      }
 
-        }.bind(this));
+    }.bind(this));
 
   };
 

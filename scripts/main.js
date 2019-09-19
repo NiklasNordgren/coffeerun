@@ -22,7 +22,7 @@
     myTruck.createOrder.call(myTruck, data);
     checkList.addRow.call(checkList, data);
   });
-  formHandler.addInputHandler(Validation.isCompanyEmail, Validation.isDecaf);
+  formHandler.addInputHandler(Validation.isCompanyEmail, Validation.isDecaf, remoteDS);
 
   console.log(formHandler);
 })(window);
