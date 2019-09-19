@@ -94,7 +94,9 @@
           event.target.reportValidity();
 
         }
-      }).then(function(){$(':input[type="submit"]').prop('disabled', false);});
+      }).then(function() {
+        $(':input[type="submit"]').prop('disabled', false);
+      });
 
       var message = '';
       if (fn(emailAddress)) {
