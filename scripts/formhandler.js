@@ -98,13 +98,13 @@
     $('[name="coffee"]').on('input', function(event) {
 
         var oldValues = [this.coffeeOrder, this.coffeeStrength];
-        this.coffeeOrder = event.target.form.coffee.value;
+        this.coffeeOrder = event.target.value;
 
         var message = '';
         if (fn2(this.coffeeOrder, this.coffeeStrength)) {
           event.target.setCustomValidity('');
         } else {
-          message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating!'
+          message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
           event.target.setCustomValidity(message);
         }
 
@@ -119,13 +119,13 @@
       $('[name="strength"]').on('input', function(event) {
 
           var oldValues = [this.coffeeOrder, this.coffeeStrength];
-          this.coffeeStrength = parseInt(event.target.form.strength.value);
+          this.coffeeStrength = parseInt(event.target.value);
 
           var message = '';
           if (fn2(this.coffeeOrder, this.coffeeStrength)) {
             event.target.setCustomValidity('');
           } else {
-            message = this.coffeeOrder + ' ' + this.coffeeStrength + ' invalid Caffeine rating!'
+            message = this.coffeeStrength + ' is an invalid Caffeine Rating for ' + this.coffeeOrder + '.'
             event.target.setCustomValidity(message);
           }
 
