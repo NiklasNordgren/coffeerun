@@ -30,7 +30,10 @@
         console.log(item.name + ' is ' + item.value);
       });
       console.log(data);
-      fn(data);
+      fn(data)
+        .then(function() {
+          this.reset();
+        }.bind(this));
 
       //Gold Challenge: Adding Achievements
       if (data.size === "coffee-zilla" && data.flavor !== "" && data.strength === "100") {
@@ -46,10 +49,8 @@
         emailsWithPowerUpsActive.splice(index, 1);
       }
 
-      this.reset();
       $('#powerUpDiv').css('display', 'none');
       $('#strengthLevel').trigger('input');
-      this.elements[0].focus();
     });
 
     $('[type=email]').on('input', function() {
@@ -86,7 +87,7 @@
 
       //Silver Challenge: Validating Against the RemoteServer
       remoteDS.get(emailAddress, function(serverResponse) {
-        if (serverResponse.emailAddress === emailAddress) {
+        if (serverResponse !== null && serverResponse.emailAddress === emailAddress) {
           message = emailAddress + ' already exsists in the remote database!';
           event.target.setCustomValidity(message);
           event.target.reportValidity();
