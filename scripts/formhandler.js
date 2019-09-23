@@ -81,7 +81,7 @@
   FormHandler.prototype.addInputHandler = function(fn, fn2, ds) {
     console.log('Setting input handler for form');
 
-    this.$formElement.on('blur', '[name="emailAddress"]', function(event) {
+    this.$formElement.on('change', '[name="emailAddress"]', function(event) {
       var emailAddress = event.target.value;
       $(':input[type="submit"]').prop('disabled', true);
 
