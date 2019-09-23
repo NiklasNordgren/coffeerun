@@ -1,32 +1,40 @@
 (function(window) {
   'use strict';
   var App = window.App || {};
-  var data;
+  var Promise = window.Promise;
 
   /*
     Silver Challenge: Making data Private
-    Declaration of the property data in the outside scope.
-    All instances of DataStore will now share the same property data.
+    Declaration of the property data in the constructor.
+    The property key can be accessed using the "this" keyword.
   */
 
   function DataStore() {
-    data = {};
+    this.data = {};
+  }
+
+  function promiseResolvedWith(value) {
+    var promise = new Promise(function(resolve, reject) {
+      resolve(value);
+    });
+    return promise;
   }
 
   DataStore.prototype.add = function(key, val) {
-    data[key] = val;
+    return promiseResolvedWith(null);
   };
 
   DataStore.prototype.get = function(key) {
-    return data[key];
+    return promiseResolvedWith(this.data[key]);
   };
 
   DataStore.prototype.getAll = function() {
-    return data;
+    return promiseResolvedWith(this.data);
   };
 
   DataStore.prototype.remove = function(key) {
-    delete data[key];
+    delete this.data[key];
+    return promiseResolvedWith(null);
   };
 
   App.DataStore = DataStore;

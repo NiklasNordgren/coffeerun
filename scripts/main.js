@@ -11,6 +11,7 @@
   var Validation = App.Validation;
   var CheckList = App.CheckList;
   var remoteDS = new RemoteDataStore(SERVER_URL);
+  var localDS = new App.DataStore;
   var myTruck = new Truck('KITT', remoteDS);
   var checkList = new CheckList(CHECKLIST_SELECTOR);
   checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));

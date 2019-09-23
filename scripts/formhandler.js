@@ -78,15 +78,15 @@
 
   };
 
-  FormHandler.prototype.addInputHandler = function(fn, fn2, remoteDS) {
+  FormHandler.prototype.addInputHandler = function(fn, fn2, ds) {
     console.log('Setting input handler for form');
 
-    this.$formElement.on('change', '[name="emailAddress"]', function(event) {
+    this.$formElement.on('blur', '[name="emailAddress"]', function(event) {
       var emailAddress = event.target.value;
       $(':input[type="submit"]').prop('disabled', true);
 
       //Silver Challenge: Validating Against the RemoteServer
-      remoteDS.get(emailAddress, function(serverResponse) {
+      ds.get(emailAddress, function(serverResponse) {
         if (serverResponse !== null && serverResponse.emailAddress === emailAddress) {
           message = emailAddress + ' already exsists in the remote database!';
           event.target.setCustomValidity(message);
