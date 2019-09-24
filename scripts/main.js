@@ -7,12 +7,17 @@
   var Truck = App.Truck;
   var DataStore = App.DataStore;
   var RemoteDataStore = App.RemoteDataStore;
+  var DataStoreProxy = App.DataStoreProxy;
   var FormHandler = App.FormHandler;
   var Validation = App.Validation;
   var CheckList = App.CheckList;
-  var remoteDS = new RemoteDataStore(SERVER_URL);
-  var localDS = new App.DataStore;
-  var myTruck = new Truck('KITT', remoteDS);
+
+  //var remoteDS = new RemoteDataStore(SERVER_URL);
+  //var localDS = new DataStore();
+
+  var dataStoreProxy = new DataStoreProxy(SERVER_URL);
+
+  var myTruck = new Truck('KITT', dataStoreProxy);
   var checkList = new CheckList(CHECKLIST_SELECTOR);
   checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));
   window.myTruck = myTruck;
@@ -24,7 +29,7 @@
           checkList.addRow.call(checkList, data);
         });
   });
-  formHandler.addInputHandler(Validation.isCompanyEmail, Validation.isDecaf, remoteDS);
+  formHandler.addInputHandler(Validation.isCompanyEmail, Validation.isDecaf, dataStoreProxy);
   myTruck.printOrders(checkList.addRow.bind(checkList));
 
   console.log(formHandler);
