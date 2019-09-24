@@ -6,7 +6,7 @@
     if (!url) {
       throw new Error('No remote URL supplied.');
     }
-    this.remoteDS = new RemoteDataStore(url);
+    this.remoteDS = new App.RemoteDataStore(url);
   }
 
   DataStoreProxy.prototype.add = function(key, val) {
