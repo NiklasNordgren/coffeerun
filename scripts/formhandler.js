@@ -81,7 +81,7 @@
   FormHandler.prototype.addInputHandler = function(fn, fn2, ds) {
     console.log('Setting input handler for form');
 
-    this.$formElement.on('change', '[name="emailAddress"]', function(event) {
+    $('#emailInput').on('blur', function(event) {
       var emailAddress = event.target.value;
       $(':input[type="submit"]').prop('disabled', true);
 
@@ -90,7 +90,7 @@
         if (serverResponse !== null && serverResponse.emailAddress === emailAddress) {
           message = emailAddress + ' already exsists in the remote database!';
           event.target.setCustomValidity(message);
-          event.target.reportValidity();
+          //event.target.reportValidity();
 
         }
       }).then(function() {
@@ -128,8 +128,20 @@
 
     }.bind(this));
 
-    $('[name="strength"]').on('input', function(event) {
+    //Silver Challenge: Showing the Value as the SliderChanges
+    var slider = $('#strengthLevel');
+    var sliderLabels = $('label[for="' + slider[0].id + '"]');
 
+    slider.on('input', function(event) {
+
+      sliderLabels[1].innerText = slider[0].value;
+
+      let redValue = slider[0].value * 2.55;
+      let greenValue = 255 - (slider[0].value * 2.55);
+
+      sliderLabels[1].style = "color: rgb(" + redValue + "," + greenValue + ",0)";
+
+      // Silver Challenge: Custom Validation for Decaf
       var oldValues = [this.coffeeOrder, this.coffeeStrength];
       this.coffeeStrength = parseInt(event.target.value);
 
@@ -148,26 +160,6 @@
       }
 
     }.bind(this));
-
-  };
-
-  //Silver Challenge: Showing the Value as the SliderChanges
-  FormHandler.prototype.addSliderHandler = function() {
-    console.log('Setting slider handler for form');
-
-    var slider = $('#strengthLevel');
-    var sliderLabels = $('label[for="' + slider[0].id + '"]');
-
-    slider.on('input', function() {
-
-      sliderLabels[1].innerText = this.value;
-
-      let redValue = this.value * 2.55;
-      let greenValue = 255 - (this.value * 2.55);
-
-      sliderLabels[1].style = "color: rgb(" + redValue + "," + greenValue + ",0)";
-
-    });
 
     //Trigger to set styles according to initial value
     slider.trigger('input');

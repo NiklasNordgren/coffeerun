@@ -6,7 +6,8 @@
   /*
     Silver Challenge: Making data Private
     Declaration of the property data in the constructor.
-    The property key can be accessed using the "this" keyword.
+    The property can be accessed using the "this" keyword,
+    followed by the dot operator and the name of the property.
   */
 
   function DataStore() {

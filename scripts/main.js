@@ -18,7 +18,6 @@
   window.myTruck = myTruck;
 
   var formHandler = new FormHandler(FORM_SELECTOR);
-  formHandler.addSliderHandler();
   formHandler.addSubmitHandler(function(data) {
     return myTruck.createOrder.call(myTruck, data)
       .then(function() {
