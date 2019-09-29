@@ -45,7 +45,7 @@
 
         clearTimeout(timer);
         //Fill form by using local datastore
-        var ds = App.DataStore;
+        var ds = App.DataStoreProxy;
         var orderValues = ds.prototype.get(email);
         console.log(orderValues);
 
@@ -60,7 +60,6 @@
 
         clicks = 0;
       }
-
 
     }.bind(this));
 

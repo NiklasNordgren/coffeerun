@@ -12,9 +12,6 @@
   var Validation = App.Validation;
   var CheckList = App.CheckList;
 
-  //var remoteDS = new RemoteDataStore(SERVER_URL);
-  //var localDS = new DataStore();
-
   var dataStoreProxy = new DataStoreProxy(SERVER_URL);
 
   var myTruck = new Truck('KITT', dataStoreProxy);

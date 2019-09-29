@@ -90,8 +90,6 @@
         if (serverResponse !== null && serverResponse.emailAddress === emailAddress) {
           message = emailAddress + ' already exsists in the remote database!';
           event.target.setCustomValidity(message);
-          //event.target.reportValidity();
-
         }
       }).then(function() {
         $(':input[type="submit"]').prop('disabled', false);
